@@ -9,6 +9,7 @@ library(lubridate)
 library(ggplot2)
 library(data.table)
 
+# Data is extracted from [Divvy dataset](https://divvy-tripdata.s3.amazonaws.com/index.html)
 # Loading the dataset in dataframes and Combining the indivdual dataframes into single dataframe
 data_files <- list.files(pattern = "*.csv")
 cycle_trips <- lapply(data_files, read_csv) %>% bind_rows()
@@ -553,5 +554,4 @@ ggsave(filename = "Top_10_Popular_End_Stations_by_Membership_Type.jpg", plot = p
 # Save the combined plot for average ride length per membership type vs total cycle hires per membership type
 ggsave(filename = "Average_Ride_Length_vs_Total_Cycle_Hires_per_Membership_Type.jpg", plot = gridExtra::arrangeGrob(pie_chart_total, pie_chart_avg, ncol = 2), width = 14, height = 8)
 
-knitr::spin("Cyclist_202301_to_202312.R")
 
