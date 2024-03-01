@@ -89,4 +89,5 @@ These insights provide a comprehensive understanding of how annual members and c
 - **Targeted Station and Route Improvements**: For stations and routes that are popular among both casual riders and members, consider improvements or expansions to accommodate the high usage. For stations and routes that are popular among casual riders but not members (or vice versa), consider targeted marketing strategies to attract the other group.
 - **Seasonal Adjustments**: Given the variations in ridership across different months, consider seasonal adjustments such as offering promotions during low-ridership months like February or enhancing bike availability during high-ridership months like July.
 
-Note: These insights and recommendations are based on visualizations created using R Studio. Please find the visualizations here [Link](Scripts/Cyclist_202301_to_202312.R)
+Note: These insights and recommendations are based on visualizations created using R Studio. Please find the scripts here [Link](Scripts/Cyclist_202301_to_202312.R)
+and visualizations here [Link](Visualization)
