@@ -517,7 +517,7 @@ print_end_stations_member <- ggplot(popular_end_stations_member, aes(x = reorder
   facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")), scales = "free")
 
 gridExtra::grid.arrange(print_popular_start_stations_member, print_end_stations_member, ncol = 2)
-ggsave(filename="Top 10 Start Stations vs Top 10 Start Stations for each membership type.jpg",plot =gridExtra::grid.arrange(print_popular_start_stations_member, print_end_stations_member, ncol = 2)
+ggsave(filename="Top 10 Start Stations vs Top 10 End Stations for each membership type.jpg",plot =gridExtra::grid.arrange(print_popular_start_stations_member, print_end_stations_member, ncol = 2)
 ,width = 10, height = 6)
 
 
