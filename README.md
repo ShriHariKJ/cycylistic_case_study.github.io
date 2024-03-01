@@ -2,6 +2,10 @@
 # Case study (Cyclistic) : How does a bike-share navigate speedy success?
 ![Image Alt Text](images/Designer.png)
 
+## Introduction
+
+This repository contains a case study analysis of Cyclistic, a fictional bike-share company in Chicago. The analysis aims to understand how different customer segments, such as casual riders and annual members, utilize Cyclistic bikes and to provide insights for designing a new marketing strategy.
+
 ## Scenario
 
 You’re a junior data analyst in the marketing team at Cyclistic, a bike-share company in Chicago. The company’s future success is believed to hinge on maximizing the number of annual memberships. Therefore, your team aims to understand how casual riders and annual members use Cyclistic bikes differently. The insights gained from this analysis will inform the design of a new marketing strategy to convert casual riders into annual members. However, before implementation, Cyclistic executives must approve your recommendations, which need to be supported by compelling data insights and professional data visualizations.
@@ -26,7 +30,7 @@ Moreno has assigned you the first question to answer: How do annual members and 
 
 ## Data Preparation
 
-In this phase, I will be using Cyclistic’s historical trip data to analyze and identify trends. The data for the previous 12 months can be downloaded from the provided source. Although the datasets have a different name because Cyclistic is a fictional company, they are appropriate for this case study and will enable me to answer the business questions.
+In this phase, I will be using Cyclistic’s historical trip data to analyze and identify trends. The data for the previous 12 months (January 2023 to December 2023) can be downloaded from the provided source. Although the datasets have a different name because Cyclistic is a fictional company, they are appropriate for this case study and will enable me to answer the business questions.
 
 The data has been made available by Motivate International Inc. under a specific license. This is public data that I can use to explore how different customer types are using Cyclistic bikes. However, it’s important to note that data-privacy issues prohibit me from using riders’ personally identifiable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes.
 
@@ -83,11 +87,17 @@ In this phase, I utilized R Studio to craft insightful visualizations that effec
 
 These insights provide a comprehensive understanding of how annual members and casual riders use Cyclistic bikes differently in Chicago. They can inform strategies to increase usage, improve services, and potentially convert casual riders to members. 
 
-## Recommendations:
+## Recommendations
 
 - **Casual User Conversion** : Given that casual users account for a significant portion of total cycle hires and tend to have longer ride lengths, there may be an opportunity to convert these users into members. This could be achieved through targeted marketing strategies or offering trial memberships.
 - **Targeted Station and Route Improvements**: For stations and routes that are popular among both casual riders and members, consider improvements or expansions to accommodate the high usage. For stations and routes that are popular among casual riders but not members (or vice versa), consider targeted marketing strategies to attract the other group.
 - **Seasonal Adjustments**: Given the variations in ridership across different months, consider seasonal adjustments such as offering promotions during low-ridership months like February or enhancing bike availability during high-ridership months like July.
 
-Note: These insights and recommendations are based on visualizations created using R Studio. Please find the scripts here [Link](Scripts/Cyclist_202301_to_202312.R)
-and visualizations here [Link](Visualization)
+## Conclusion
+
+The analysis provides valuable insights into Cyclistic bike usage and lays the groundwork for developing effective marketing strategies to drive growth and conversion.
+
+---
+*Note: These insights and recommendations are based on visualizations created using R Studio
+For more details, please refer to the [full analysis](Scripts/Cyclist_202301_to_202312.R) and [visualizations](Visualization) in this repository.*
+
