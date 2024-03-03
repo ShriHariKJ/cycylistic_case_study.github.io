@@ -80,8 +80,15 @@ In this phase, I utilized R Studio to craft insightful visualizations that effec
 ## Principal Discoveries and Insights
 
 - **Membership Types**: Members, who likely are residents of Chicago, make up the majority of cycle hires (65.8%). Casual users, possibly tourists or occasional riders, account for a significant portion (34.2%).
+![Cycle Hires per membership type](Visualization/Total_Cycle_Hires_per_Membership_Type.jpg)
+
 - **Ride Lengths**: Casual users generally have longer ride lengths than members throughout all months. The most significant difference occurs in July and August, which aligns with the summer season in Chicago. This could suggest that casual users, potentially tourists, are using bikes for leisure or sightseeing purposes during the warm summer months.
+![Ride length per Membership type by month](Visualization/Average_Ride_Length_per_Membership_Type_by_Month.jpg)
+
 - **Popular Stations**: Certain stations are more popular than others for both starting and ending bike rides. The popularity of start and end stations varies between casual riders and members, indicating different usage patterns. Some stations are popular among both casual riders and members, suggesting they might be located in convenient or popular areas, such as tourist attractions or major transit hubs.
+
+![Top Stations per Membership Type](Visualization/Top 10 Start Stations vs Top 10 End Stations for each membership type.jpg)
+  
 - **Popular Routes**: Certain routes are more popular than others for both casual riders and members. The popularity of routes varies between casual riders and members, indicating different usage patterns. Some routes are popular among both casual riders and members, suggesting they might be scenic or convenient routes.
 - **Ridership Patterns**: The total number of riders varies significantly across different days of the week and months of the year. The highest number of riders is observed on Monday and January, and the lowest on Wednesday and February. This could suggest that usage patterns are influenced by factors such as work schedules, weather conditions, and tourist seasons.
 
