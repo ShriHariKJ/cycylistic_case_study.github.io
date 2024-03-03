@@ -1,6 +1,6 @@
 ###### cycylistic_case_study.github.io
 # Case study (Cyclistic) : How does a bike-share navigate speedy success?
-![Image Alt Text](images/Designer.png)
+![Cyclistic](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/c367afcd6ab42c22b980cfd780055503511b526b/images/Designer.png)
 
 ## Introduction
 
