@@ -93,10 +93,10 @@ In this phase, I utilized R Studio to craft insightful visualizations that effec
 ![Top 10 Routes per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/0ceb4009d90b6525874540332579ce09d57bd45f/Visualization/Top_10_Routes_for_Members_and_Casual_Riders.jpg)
 
 - **Ridership Patterns**: The total number of riders varies significantly across different days of the week and months of the year. The highest number of riders is observed on Monday and January, and the lowest on Wednesday and February. This could suggest that usage patterns are influenced by factors such as work schedules, weather conditions, and tourist seasons.
-<div style="text-align: center;">
-  <img src="./Visualization/Total_Riders_per_Month.jpg" width="400" />
-  <img src="./Visualization/Total_Riders_per_Day_of_Week.jpg" width="400" />
-</div>
+  <div style="text-align: center; margin: auto;">
+    <img src="./Visualization/Total_Riders_per_Month.jpg" width="450" />
+    <img src="./Visualization/Total_Riders_per_Day_of_Week.jpg" width="450" />
+  </div>
  
 These insights provide a comprehensive understanding of how annual members and casual riders use Cyclistic bikes differently in Chicago. They can inform strategies to increase usage, improve services, and potentially convert casual riders to members. 
 
