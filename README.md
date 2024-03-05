@@ -85,7 +85,7 @@ In this phase, I utilized R Studio to craft insightful visualizations that effec
 - **Ride Lengths**: Casual users generally have longer ride lengths than members throughout all months. The most significant difference occurs in July and August, which aligns with the summer season in Chicago. This could suggest that casual users, potentially tourists, are using bikes for leisure or sightseeing purposes during the warm summer months.
 ![Ride length per Membership type by month](Visualization/Average_Ride_Length_per_Membership_Type_by_Month.jpg)
 
-- **Popular Stations**: Certain stations like *"Streeter Dr & Grand Ave"* are more popular than others for both starting and ending bike rides. The popularity of start and end stations varies between casual riders and members, indicating different usage patterns. Some stations are popular among both casual riders and members, suggesting they might be located in convenient or popular areas, such as tourist attractions or major transit hubs.
+- **Popular Stations**: Certain stations like *"Streeter Dr & Grand Ave"* and *"Clinton St & Washigton Blvd"* are more popular than others for both starting and ending bike rides for casual and members respectively. The popularity of start and end stations varies between casual riders and members, indicating different usage patterns. Some stations are popular among both casual riders and members, suggesting they might be located in convenient or popular areas, such as tourist attractions or major transit hubs.
 ![Top Stations per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/d27a482ce11c46ff2cea64083f83f7d07d6e0162/Visualization/Top%2010%20Start%20Stations%20vs%20Top%2010%20End%20Stations%20for%20each%20membership%20type.jpg)
 
   
