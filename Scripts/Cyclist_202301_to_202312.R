@@ -2,14 +2,17 @@
 install.packages("tidyverse")
 install.packages("lubridate")
 install.packages("ggplot2")
+install.packages("reshape2")
+
 
 # Loading the packages
 library(tidyverse)
 library(lubridate)
 library(ggplot2)
 library(data.table)
+library(reshape2)
+library(scales)
 
-# Data is extracted from [Divvy dataset](https://divvy-tripdata.s3.amazonaws.com/index.html)
 # Loading the dataset in dataframes and Combining the indivdual dataframes into single dataframe
 data_files <- list.files(pattern = "*.csv")
 cycle_trips <- lapply(data_files, read_csv) %>% bind_rows()
@@ -132,7 +135,7 @@ negative_row_count <- nrow(negative_ride_length_df)
 # Print the total number of rows with negative ride lengths
 cat("Total number of rows with negative ride lengths:", negative_row_count, "\n")
 
-# Total number of rows with negative ride lengths: 0 
+# Total number of rows with negative ride lengths: 66 
 
 # Data with only positive ride length is extracted
 cleaned_df <- cleaned_df[cleaned_df$ride_length > 0, ]
@@ -176,83 +179,102 @@ riders_per_membership_plot <- ggplot(data = riders_per_category, aes(x = "", y =
     legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
   )
 
-# Total number of riders per each category and month
-riders_per_category_month <- cleaned_df %>%
-  group_by(member_casual,month) %>%
-  summarise(total_riders = n(), .groups = "drop")
+# Total number of riders by month
+riders_by_month <- cleaned_df %>%
+  group_by(month) %>%
+  summarise(total_riders = n())
 
 # Casting the month from month.number to month.name format 
-riders_per_category_month$month <- month.name[as.integer(riders_per_category_month$month)]
+riders_by_month$month_name <- factor(month.abb[as.integer(riders_by_month$month)], levels = month.abb)
 
-# Print the riders_per_category_month
-head(riders_per_category_month)
+# Print the riders_by_month
+head(riders_by_month)
+print(riders_by_month, max=nrow(riders_by_month))
 
 # Manual assigning of color for each month
-month_colors <- c("January" = "red", "February" = "blue", "March" = "green",
-                  "April" = "orange", "May" = "purple", "June" = "brown",
-                  "July" = "pink", "August" = "gray", "September" = "cyan",
-                  "October" = "yellow", "November" = "magenta", "December" = "gold")
+month_colors <- c("Jan" = "red", "Feb" = "blue", "Mar" = "green",
+                  "Apr" = "orange", "May" = "purple", "Jun" = "brown",
+                  "Jul" = "pink", "Aug" = "gray", "Sep" = "cyan",
+                  "Oct" = "yellow", "Nov" = "magenta", "Dec" = "gold")
 
 # Bar chart to show riders per month 
-riders_by_month_plot<-ggplot(riders_per_category_month, aes(x = month, y = total_riders, fill = month)) +
+riders_by_month_plot <- ggplot(riders_by_month, aes(x = month_name, y = total_riders, fill = month_name)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") +
   scale_fill_manual(values = month_colors) +
   labs(
     title = "Total Riders per Month (2023)",
-    subtitle = "Data collected from Divvy source", # Add a subtitle for additional information
-    x = "Day of Week",
+    subtitle = "Data collected from Divvy source",
+    x = "Month",
     y = "Total Riders",
-    caption = "Note: Total riders are calculated in number of hires", # Add a caption for more context or explanation
+    caption = "Note: Total riders are calculated in number of hires",
     fontface = "bold"
   ) +
   theme_minimal() +
-  scale_x_discrete(labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "July","Aug","Sep","Oct","Nov","Dec")) +
+  scale_x_discrete(labels = month.abb) +
   scale_y_continuous(labels = scales::comma) +
   theme(
     legend.position = "none",
-    axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
-    panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
+    axis.text = element_text(size = 12),
+    panel.grid.major = element_line(linetype = "dashed", color = "grey"),
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12)
   )
 
 
 
+# Total number of riders per each category and month
+riders_per_category_month <- cleaned_df %>%
+  group_by(member_casual, month) %>%
+  summarise(total_riders = n(), .groups = "drop")
+
+# Casting the month from month.number to month.name format 
+riders_per_category_month$month_name <- factor(month.abb[as.integer(riders_per_category_month$month)], levels = month.abb)
+
+# Print the riders_per_category_month
+head(riders_per_category_month)
+print(riders_per_category_month,n=nrow(riders_per_category_month))
+
 # Bar chart to show riders per month by Membership Type
-riders_by_month_per_category_plot <-ggplot(riders_per_category_month, aes(x = month, y = total_riders, fill = member_casual)) +
+riders_by_month_per_category_plot <- ggplot(riders_per_category_month, aes(x = month, y = total_riders, fill = member_casual)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") +
   labs(
     title = "Total Riders per Month by Membership Type (2023)",
-    subtitle = "Data collected from Divvy source", # Add a subtitle for additional information
+    subtitle = "Data collected from Divvy source",
     x = "Month",
     y = "Total Riders",
-    caption = "Note: Total riders are calculated in number of hires", # Add a caption for more context or explanation
+    caption = "Note: Total riders are calculated in number of hires",
     fontface = "bold"
   ) +
   theme_minimal() +
-  scale_x_discrete(limits = month.name) +
+  scale_x_discrete(labels = month.abb) +
   scale_y_continuous(labels = scales::comma) +
+  scale_fill_manual(values = c("#a83232", "#6cf70f"), name = "Membership Type") +
   theme(
     legend.position = "top",
     legend.title = element_blank(),
-    axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
-    panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
-  ) +
-  scale_fill_manual(values = c("#a83232", "#6cf70f")) 
+    axis.text = element_text(size = 12),
+    panel.grid.major = element_line(linetype = "dashed", color = "grey"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12)
+  )
 
 
-# Total number of riders per each category and day_of_week
-riders_per_category_day <- cleaned_df %>%
-  group_by(member_casual,day_of_week) %>%
-  summarise(total_riders = n(), .groups = "drop")
+# Total number of riders by day_of_week
+riders_per_day <- cleaned_df %>%
+  group_by(day_of_week) %>%
+  summarise(total_riders = n())
 
 # Print the riders_per_category_day
-head(riders_per_category_day)
+head(riders_per_day)
+print(riders_per_day,n=nrow(riders_per_day))
 
 # Manual assigning of color for each day_of_week
 day_colors <- c("Sunday" = "red", "Monday" = "blue", "Tuesday" = "green",
                 "Wednesday" = "orange", "Thursday" = "purple", "Friday" = "brown", "Saturday" = "pink")
 
 # Bar chart to show riders per day_of_week
-riders_per_day_plot <- ggplot(riders_per_category_day, aes(x = day_of_week, y = total_riders, fill = day_of_week)) +
+riders_per_day_plot <- ggplot(riders_per_day, aes(x = day_of_week, y = total_riders, fill = day_of_week)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") +
   scale_fill_manual(values = day_colors) +
   labs(
@@ -270,13 +292,26 @@ riders_per_day_plot <- ggplot(riders_per_category_day, aes(x = day_of_week, y = 
     legend.position = "none",
     axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
     panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
+  )+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
   )
 
 
-# Bar chart to show riders per day_of_week by Membership Type
-riders_by_day_per_category_plot <- ggplot(riders_per_category_day, aes(x = day_of_week, y = total_riders, fill = member_casual)) +
+# Total number of riders per each category and day_of_week
+riders_per_category_day <- cleaned_df %>%
+  group_by(member_casual,day_of_week) %>%
+  summarise(total_riders = n(), .groups = "drop")
+
+# Print the riders_per_category_day
+head(riders_per_category_day)
+
+# Bar chart to show riders per day_of_week by Membership Type 
+riders_per_category_day_plot <- ggplot(riders_per_category_day, aes(x = day_of_week, y = total_riders, fill = member_casual)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") +
-  labs( 
+  labs(
     title = "Total Riders per Day of Week by Membership Type (2023)",
     subtitle = "Data collected from Divvy source", # Add a subtitle for additional information
     x = "Day of Week",
@@ -287,13 +322,15 @@ riders_by_day_per_category_plot <- ggplot(riders_per_category_day, aes(x = day_o
   theme_minimal() +
   scale_x_discrete(labels = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")) +
   scale_y_continuous(labels = scales::comma) +
+  scale_fill_manual(values = c("#a83232", "#6cf70f"), name = "Membership Type") +
   theme(
     legend.position = "top",
     legend.title = element_blank(),
-    axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
-    panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
-  ) +
-  scale_fill_manual(values = c("#702810", "#0e2ee6")) 
+    axis.text = element_text(size = 12),
+    panel.grid.major = element_line(linetype = "dashed", color = "grey"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12)
+  )
 
 
 # Average ride_length per Membership type
@@ -320,6 +357,11 @@ pie_chart_avg  <- ggplot(average_ride_length, aes(x = "", y = ride_length, fill 
     legend.title = element_text(face = "bold"),
     plot.title = element_text(face = "bold"),
     legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
   )
 
 # Pie chart to show riders per Membership type 
@@ -340,15 +382,16 @@ pie_chart_total  <- ggplot(data = riders_per_category, aes(x = "", y = total_rid
     legend.title = element_text(face = "bold"),
     plot.title = element_text(face = "bold"),
     legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
   )
 
-# Installing packages
-install.packages("gridExtra")
-library(gridExtra)
 
 # Displaying Average Ride Length per Membership Type vs Total Cycle Hires per Membership Type
 gridExtra::grid.arrange(pie_chart_total, pie_chart_avg, ncol = 2)
-ggsave(filename="Average Ride Length per Membership Type vs Total Cycle Hires per Membership Type.jpg",plot =gridExtra::grid.arrange(pie_chart_total, pie_chart_avg, ncol = 2),width = 10, height = 6)
 
 # Calculate average ride length per membership type by day of the week
 average_ride_length_by_day <- aggregate(ride_length ~ member_casual + day_of_week, data = cleaned_df, FUN = mean)
@@ -376,7 +419,12 @@ average_ride_length_by_day_per_membership_plot <- ggplot(average_ride_length_by_
     axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
     panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
   ) +
-  scale_fill_manual(values = c("#702810", "#0e2ee6")) 
+  scale_fill_manual(values = c("#702810", "#0e2ee6")) +
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
 
 # Calculate average ride length per membership type by Month
 average_ride_length_by_month <- aggregate(ride_length ~ member_casual + month, data = cleaned_df, FUN = mean)
@@ -404,7 +452,12 @@ average_ride_length_by_month_per_membership_plot <- ggplot(average_ride_length_b
     axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
     panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
   ) +
-  scale_fill_manual(values = c("#702810", "#0e2ee6")) 
+  scale_fill_manual(values = c("#702810", "#0e2ee6")) +
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
 
 # Total number of riders per Rideable Type and Membership Type
 riders_per_category_ridetype <- cleaned_df %>%
@@ -445,6 +498,39 @@ top_10_stations <- bind_rows(top_10_stations_member, top_10_stations_casual)
 top_10_stations_ordered <- top_10_stations %>%
   arrange(member_casual, desc(total_riders))
 
+# Create dataframe for riders across days and month
+df_heatmap <- cleaned_df %>%
+  group_by(day_of_week, month) %>%
+  summarise(total_riders = n(), .groups = "drop")
+head(df_heatmap)
+
+df_heatmap$month <- factor(df_heatmap$month, levels = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+                           labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+
+# Display the heatmap for Total Number of Riders Across Days of the Week and Months of the Year
+totalriders_across_days_months <- ggplot(df_heatmap, aes(x = month, y = day_of_week, fill = total_riders)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "white", high = "steelblue", labels = comma) +
+  theme_minimal() +
+  labs(title = "Total Number of Riders Across Days of the Week and Months of the Year",
+       subtitle = "Data collected from Divvy source", # Add a subtitle for additional information
+       x = "Month",
+       y = "Day of the Week",
+       fill = "Total Riders",    
+       caption = "Note: Total riders is calculated in number of rides", # Add a caption for more context or explanation
+       fontface = "bold") + 
+    theme(
+         legend.position = "right", 
+         legend.title = element_blank(),
+         axis.text = element_text(size = 12), # Increase the size of axis labels for better readability
+         panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
+       ) +
+    theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
+
 
 # Create a bar plot ordered by Membership Type and total_riders
 Top10_routes_for_membership_plot <- ggplot(top_10_stations_ordered, aes(x = reorder(station_name, -total_riders), y = total_riders, fill = member_casual)) +
@@ -467,7 +553,12 @@ Top10_routes_for_membership_plot <- ggplot(top_10_stations_ordered, aes(x = reor
     panel.grid.major = element_line(linetype = "dashed", color = "grey") # Add grid lines for better understanding of the plot
   ) +
   facet_grid(. ~ member_casual, scales = "free", space = "free")+
-  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")))
+  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")))+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
 
 
 # Popular start stations by membership type
@@ -500,7 +591,12 @@ print_popular_start_stations_member <- ggplot(popular_start_stations_member, aes
   theme(legend.position = "top", 
         legend.title = element_blank(),
         axis.text.x = element_text(angle = 45, hjust = 1),panel.grid.major = element_line(linetype = "dashed", color = "grey")) +
-  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")), scales = "free")
+  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")), scales = "free")+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
 
 # Plot for Top 10 end stations
 print_end_stations_member <- ggplot(popular_end_stations_member, aes(x = reorder(end_station_name, -total_rides), y = total_rides)) +
@@ -514,7 +610,12 @@ print_end_stations_member <- ggplot(popular_end_stations_member, aes(x = reorder
     fontface = "bold"
   ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),panel.grid.major = element_line(linetype = "dashed", color = "grey")) +
-  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")), scales = "free")
+  facet_wrap(~ factor(member_casual, levels = c("casual", "member"), labels = c("Casual", "Member")), scales = "free")+
+  theme(
+    legend.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 12) # Increase the size of legend labels for better readability
+  )
 
 gridExtra::grid.arrange(print_popular_start_stations_member, print_end_stations_member, ncol = 2)
 ggsave(filename="Top 10 Start Stations vs Top 10 End Stations for each membership type.jpg",plot =gridExtra::grid.arrange(print_popular_start_stations_member, print_end_stations_member, ncol = 2)
@@ -532,6 +633,12 @@ ggsave(filename = "Total_Riders_per_Month.jpg", plot = riders_by_month_plot, wid
 
 # Save the bar chart for total riders per day of week
 ggsave(filename = "Total_Riders_per_Day_of_Week.jpg", plot = riders_per_day_plot, width = 12, height = 6)
+
+# Save the bar chart for total riders by month per membership type
+ggsave(filename = "Total_Riders_by_Month_per_Membership_Type.jpg", plot = riders_by_month_per_category_plot, width = 12, height = 6)
+
+# Save the bar chart for total riders by day of week per membership type
+ggsave(filename = "Total_Riders_by_Day_of_Week_per_Membership_Type.jpg", plot = riders_per_category_day_plot, width = 12, height = 6)
 
 # Save the bar chart for average ride length per membership type by day of week
 ggsave(filename = "Average_Ride_Length_per_Membership_Type_by_Day_of_Week.jpg", plot = average_ride_length_by_day_per_membership_plot, width = 12, height = 6)
@@ -554,4 +661,6 @@ ggsave(filename = "Top_10_Popular_End_Stations_by_Membership_Type.jpg", plot = p
 # Save the combined plot for average ride length per membership type vs total cycle hires per membership type
 ggsave(filename = "Average_Ride_Length_vs_Total_Cycle_Hires_per_Membership_Type.jpg", plot = gridExtra::arrangeGrob(pie_chart_total, pie_chart_avg, ncol = 2), width = 14, height = 8)
 
+# Save the bar chart for top 10 end stations by membership type
+ggsave(filename = "Total_Number_of_Riders_Across_Days_of_the_Week_and_Months_of_the_Year.jpg", plot = totalriders_across_days_months, width = 12, height = 6)
 
