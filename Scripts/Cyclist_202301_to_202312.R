@@ -273,6 +273,9 @@ print(riders_per_day,n=nrow(riders_per_day))
 day_colors <- c("Sunday" = "red", "Monday" = "blue", "Tuesday" = "green",
                 "Wednesday" = "orange", "Thursday" = "purple", "Friday" = "brown", "Saturday" = "pink")
 
+# Reorder the levels of day_of_week to match the order in your data
+riders_per_day$day_of_week <- factor(riders_per_day$day_of_week, levels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+
 # Bar chart to show riders per day_of_week
 riders_per_day_plot <- ggplot(riders_per_day, aes(x = day_of_week, y = total_riders, fill = day_of_week)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") +
