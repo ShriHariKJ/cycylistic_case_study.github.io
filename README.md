@@ -80,23 +80,27 @@ In this phase, I utilized R Studio to craft insightful visualizations that effec
 ## Principal Discoveries and Insights
 
 - **Membership Types**: Members, who likely are residents of Chicago, make up the majority of cycle hires (65.8%). Casual users, possibly tourists or occasional riders, account for a significant portion (34.2%).
-![Cycle Hires per membership type](Visualization/Total_Cycle_Hires_per_Membership_Type.jpg)
+![Cycle Hires per membership type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/3417528813fb7e6d4c3146061d9bb6ab0932fa87/Visualization_v2/Total_Cycle_Hires_per_Membership_Type.jpg)
 
 - **Ride Lengths**: Casual users generally have longer ride lengths than members throughout all months. The most significant difference occurs in July and August, which aligns with the summer season in Chicago. This could suggest that casual users, potentially tourists, are using bikes for leisure or sightseeing purposes during the warm summer months.
-![Ride length per Membership type by month](Visualization/Average_Ride_Length_per_Membership_Type_by_Month.jpg)
+![Ride length per Membership type by month](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/3417528813fb7e6d4c3146061d9bb6ab0932fa87/Visualization_v2/Average_Ride_Length_per_Membership_Type_by_Month.jpg)
 
 - **Popular Stations**: Certain stations like *"Streeter Dr & Grand Ave"* and *"Clinton St & Washigton Blvd"* are more popular than others for both starting and ending bike rides for casual and members respectively. The popularity of start and end stations varies between casual riders and members, indicating different usage patterns. Some stations are popular among both casual riders and members, suggesting they might be located in convenient or popular areas, such as tourist attractions or major transit hubs.
-![Top Stations per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/d27a482ce11c46ff2cea64083f83f7d07d6e0162/Visualization/Top%2010%20Start%20Stations%20vs%20Top%2010%20End%20Stations%20for%20each%20membership%20type.jpg)
+![Top Stations per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/3417528813fb7e6d4c3146061d9bb6ab0932fa87/Visualization_v2/Top%2010%20Start%20Stations%20vs%20Top%2010%20End%20Stations%20for%20each%20membership%20type.jpg)
 
   
 - **Popular Routes**: Certain routes are more popular than others for both casual riders and members. The popularity of routes varies between casual riders and members, indicating different usage patterns. Some routes are popular among both casual riders and members, suggesting they might be scenic or convenient routes.
-![Top 10 Routes per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/0ceb4009d90b6525874540332579ce09d57bd45f/Visualization/Top_10_Routes_for_Members_and_Casual_Riders.jpg)
+![Top 10 Routes per Membership Type](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/3417528813fb7e6d4c3146061d9bb6ab0932fa87/Visualization_v2/Top_10_Routes_for_Members_and_Casual_Riders.jpg)
 
-- **Ridership Patterns**: The total number of riders varies significantly across different days of the week and months of the year. The highest number of riders is observed on Monday and January, and the lowest on Wednesday and February. This could suggest that usage patterns are influenced by factors such as work schedules, weather conditions, and tourist seasons.
+- **Ridership Patterns**: The total number of riders varies significantly across different days of the week and months of the year. The highest number of riders is observed on Thursday and August and the lowest on Sunday and Janurary and heatmap shows Tuesday and Wednesday consistently exhibit higher ridership throughout most months and June stands out as a month with significantly increased ridership across all weekdays. This could suggest that usage patterns are influenced by factors such as work schedules, weather conditions, and tourist seasons.
   <div style="text-align: center; margin: auto;">
-    <img src="./Visualization/Total_Riders_per_Month.jpg" width="450" />
-    <img src="./Visualization/Total_Riders_per_Day_of_Week.jpg" width="450" />
+    <img src="https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/3417528813fb7e6d4c3146061d9bb6ab0932fa87/Visualization_v2/Total_Riders_per_Month.jpg" width="450" />
+    <img src="https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/d8d8bd51b14334019534581de6f100287eb3c880/Visualization_v2/Total_Riders_per_Day_of_Week.jpg" width="450" />
   </div>
+<p align="center">
+  <img src="https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/d8d8bd51b14334019534581de6f100287eb3c880/Visualization_v2/Total_Number_of_Riders_Across_Days_of_the_Week_and_Months_of_the_Year.jpg" width="450" />
+</p>
+
  
 These insights provide a comprehensive understanding of how annual members and casual riders use Cyclistic bikes differently in Chicago. They can inform strategies to increase usage, improve services, and potentially convert casual riders to members. 
 
@@ -104,7 +108,7 @@ These insights provide a comprehensive understanding of how annual members and c
 
 - **Casual User Conversion** : Given that casual users account for a significant portion of total cycle hires and tend to have longer ride lengths, there may be an opportunity to convert these users into members. This could be achieved through targeted marketing strategies or offering trial memberships.
 - **Targeted Station and Route Improvements**: For stations and routes that are popular among both casual riders and members, consider improvements or expansions to accommodate the high usage. For stations and routes that are popular among casual riders but not members (or vice versa), consider targeted marketing strategies to attract the other group.
-- **Seasonal Adjustments**: Given the variations in ridership across different months, consider seasonal adjustments such as offering promotions during low-ridership months like February or enhancing bike availability during high-ridership months like July.
+- **Seasonal Adjustments**: Given the variations in ridership across different months, consider seasonal adjustments such as offering promotions during low-ridership months like January and February or enhancing bike availability during high-ridership months like July and August.
 
 ## Conclusion
 
