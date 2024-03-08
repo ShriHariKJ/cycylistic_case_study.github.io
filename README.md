@@ -116,5 +116,5 @@ The analysis provides valuable insights into Cyclistic bike usage and lays the g
 
 ---
 *Note: These insights and recommendations are based on visualizations created using R Studio
-For more details, please refer to the [full analysis](Scripts/Cyclist_202301_to_202312.R) and [visualizations](Visualization) in this repository.*
+For more details, please refer to the [full analysis](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/6ad06e4413ef9b85c0fcb8679f7ed4f9884c1d95/Scripts/Cyclist_202301_to_202312.R) and [visualizations](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/tree/6ad06e4413ef9b85c0fcb8679f7ed4f9884c1d95/Visualization_v2) in this repository.*
 
