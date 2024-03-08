@@ -75,7 +75,7 @@ Lastly, I compared how the selection of bike type varied between the two rider c
 
 ## Communicating Findings Through Visualizations
 
-In this phase, I utilized R Studio to craft insightful visualizations that effectively communicate the outcomes of my analysis. The visualizations, along with the derived insights, can be accessed at the provided location. R Studio, with its powerful graphics capabilities, was instrumental in this process. Please note that the specific libraries used for visualization may vary based on the requirements of the analysis.
+In this phase, I utilized R Studio to craft insightful visualizations that effectively communicate the outcomes of my analysis. The visualizations, along with the derived insights, can be accessed at the provided location. R Studio, with its powerful graphics capabilities, was instrumental in this process. Please note that the specific libraries used for visualization may vary based on the requirements of the analysis. The presentation explaining the visualization is attached here. [Presentation_of_findings](https://github.com/ShriHariKJ/cycylistic_case_study.github.io/blob/b186ebb038294fe8175ae312ec9fe7ed24e19f35/Presentation/Cyclistic_Data_Analysis.pptx)
 
 ## Principal Discoveries and Insights
 
